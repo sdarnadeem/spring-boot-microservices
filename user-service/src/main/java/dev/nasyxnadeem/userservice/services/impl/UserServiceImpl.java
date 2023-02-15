@@ -3,11 +3,14 @@ package dev.nasyxnadeem.userservice.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import dev.nasyxnadeem.userservice.exceptions.ResourceNotFoundException;
 import dev.nasyxnadeem.userservice.models.User;
 import dev.nasyxnadeem.userservice.repos.UserRepo;
 import dev.nasyxnadeem.userservice.services.UserServices;
 
+@Service
 public class UserServiceImpl implements UserServices {
 
     @Autowired
@@ -21,24 +24,21 @@ public class UserServiceImpl implements UserServices {
 
     @Override
     public User getUserById(String id) {
-        return this.getUserById(id);
+        return this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     @Override
     public List<User> getUsers() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.userRepo.findAll();
     }
 
     @Override
     public User saveUser(User user) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.userRepo.save(user);
     }
 
     @Override
     public User updateUser(String id, User user) {
-        // TODO Auto-generated method stub
         return null;
     }
 
