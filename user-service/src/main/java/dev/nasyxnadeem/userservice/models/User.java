@@ -1,5 +1,7 @@
 package dev.nasyxnadeem.userservice.models;
 
+import java.util.*;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,4 +22,7 @@ public class User {
     private String email;
 
     private String about;
+
+    @Transient
+    private List<Rating> ratings;
 }
