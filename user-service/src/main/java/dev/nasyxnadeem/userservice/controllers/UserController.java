@@ -37,5 +37,4 @@ public class UserController {
         User user = this.userService.getUserById(userId);
         return ResponseEntity.ok(user);
     }
-
 }
