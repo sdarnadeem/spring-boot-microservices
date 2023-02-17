@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://sdarnadeem:password%40123@cluster0.1aeyori.mongodb.net/?retryWrites=true&w=majority
+      database: custer0
+server:
+  port: 3002
