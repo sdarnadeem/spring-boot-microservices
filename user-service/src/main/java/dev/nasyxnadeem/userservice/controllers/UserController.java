@@ -8,7 +8,7 @@ import dev.nasyxnadeem.userservice.services.UserServices;
 import java.util.*;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
