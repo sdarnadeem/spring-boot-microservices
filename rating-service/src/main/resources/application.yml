@@ -1,6 +1,6 @@
 spring:
   application:
-    name: "rating_service"
+    name: "RATING-SERVICE"
   data:
     mongodb:
       uri: mongodb+srv://sdarnadeem:password%40123@cluster0.1aeyori.mongodb.net/?retryWrites=true&w=majority

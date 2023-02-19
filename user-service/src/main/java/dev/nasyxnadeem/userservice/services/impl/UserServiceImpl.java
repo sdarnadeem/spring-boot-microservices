@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import dev.nasyxnadeem.userservice.exceptions.ResourceNotFoundException;
 import dev.nasyxnadeem.userservice.models.*;
 import dev.nasyxnadeem.userservice.repos.UserRepo;
-import dev.nasyxnadeem.userservice.services.UserServices;
+import dev.nasyxnadeem.userservice.services.*;
 
 @Service
 public class UserServiceImpl implements UserServices {
@@ -20,6 +20,9 @@ public class UserServiceImpl implements UserServices {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private HotelService hotelService;
 
     @Override
     public void deleteUser(String id) {
@@ -33,7 +36,7 @@ public class UserServiceImpl implements UserServices {
         User user = this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         // fetch rating of the above user
-        String url = "http://localhost:3002/ratings/userId/" + id;
+        String url = "http://RATING-SERVICE/ratings/userId/" + id;
         // List<Rating> rat = new ArrayList<Rating>();
         // @SuppressWarnings("unchecked")
         Rating[] ratingsOfUser = restTemplate.getForObject(url, Rating[].class);
@@ -41,9 +44,7 @@ public class UserServiceImpl implements UserServices {
 
         List<Rating> newRatings = ratings.stream().map(rating -> {
 
-            // {{3002}}/ratings/hotelId/jdfhjf
-            String uri = "http://localhost:3001/hotels/" + rating.getHotelId();
-            Hotel hotel = restTemplate.getForObject(uri, Hotel.class);
+            Hotel hotel = this.hotelService.getHotel(rating.getHotelId());
 
             rating.setHotel(hotel);
 
