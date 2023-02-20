@@ -7,5 +7,5 @@ spring:
     config:
       server:
         git:
-          uri:
+          uri: https://github.com/sdarnadeem/spring-boot-microservices
           clone-on-start: true
